@@ -968,7 +968,7 @@ footer{padding-block:28px;text-align:center;color:var(--muted);font-size:.85rem;
       if (Math.random() < .78) { const f = hz(scale[step]) * 2; tone(f, t0 + i * .66, 3, .04); tone(f * 2, t0 + i * .66, 1.4, .007); }
     }
   }
-  function startMusic() {
+  function startGen() {
     if (playing) return;
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
@@ -984,13 +984,42 @@ footer{padding-block:28px;text-align:center;color:var(--muted);font-size:.85rem;
     } catch { playing = false; }
     syncBtn();
   }
-  function stopMusic() {
+  function stopGen() {
     if (!playing) return;
     clearInterval(timer); playing = false;
     const m = master, w = wet, now = ac.currentTime;
     [m, w].forEach(g => { g.gain.cancelScheduledValues(now); g.gain.setValueAtTime(g.gain.value, now); g.gain.linearRampToValueAtTime(0, now + 1.4); });
     setTimeout(() => { m.disconnect(); w.disconnect(); }, 1600);
     syncBtn();
+  }
+  /* Background track: plays bgm.mp3 kept beside this page; falls back to the generative piece if it is missing */
+  const bgm = new Audio('bgm.mp3');
+  bgm.loop = true; bgm.preload = 'auto';
+  let mode = null, fileOK = true, fadeT;
+  function fade(to, ms, done) {
+    clearInterval(fadeT);
+    const from = bgm.volume, f0 = performance.now();
+    fadeT = setInterval(() => {
+      const k = Math.min(1, (performance.now() - f0) / ms);
+      bgm.volume = from + (to - from) * k;
+      if (k === 1) { clearInterval(fadeT); done && done(); }
+    }, 40);
+  }
+  function startMusic() {
+    if (playing) return;
+    try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume(); } catch {}
+    if (!fileOK) { mode = 'gen'; return startGen(); }
+    mode = 'file'; playing = true; syncBtn();
+    bgm.volume = 0;
+    const fallback = () => { fileOK = false; if (mode !== 'file' || !playing) return; playing = false; mode = 'gen'; startGen(); };
+    const p = bgm.play();
+    if (p && p.then) p.then(() => playing && mode === 'file' ? fade(.85, 2500) : bgm.pause()).catch(fallback);
+    else fade(.85, 2500);
+  }
+  function stopMusic() {
+    if (!playing) return;
+    if (mode === 'file') { playing = false; syncBtn(); fade(0, 1400, () => bgm.pause()); }
+    else stopGen();
   }
   function syncBtn() {
     btn.setAttribute('aria-pressed', playing);
