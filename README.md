@@ -23,6 +23,16 @@ tests/
 index.html, images/     the earlier pink version, kept for reference, not deployed
 ```
 
+## Deploying with the Cloudflare dashboard uploader
+
+The dashboard's "Upload static files" screen accepts only HTML, CSS and JS, so image files are dropped and the page renders unstyled. For that uploader, deploy the single-file build instead:
+
+```bash
+python3 tools/build_single.py
+```
+
+This writes `dist/index.html` (about 0.9 MB, with CSS, JS and images inlined). Upload **only that file**. With Git-connected Pages or `wrangler deploy`, serve the `deploy/` folder instead: it is faster (0.29 MB, AVIF images).
+
 ## Running locally
 
 ```bash
