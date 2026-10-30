@@ -20,24 +20,30 @@
     navLinks.forEach(a => { const s = document.querySelector(a.hash); if (s) io.observe(s); });
   }
 
-  /* Countdown: Muhurtham 06 Dec 2026, 08:00 IST */
-  const target = Date.parse('2026-12-06T08:00:00+05:30');
+  /* Countdown: Muhurtham 06 Dec 2026, 08:00 IST (logic in js/countdown.js) */
+  const CD = window.WeddingCountdown;
   const pad = n => String(n).padStart(2, '0');
+  const local = CD.localTime(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  if (local) { $('#cd-local').textContent = `That is ${local} where you are.`; $('#cd-local').hidden = false; }
+  let shownPhase;
   function tick() {
-    let ms = target - Date.now();
-    if (ms <= 0) {
-      $('#count-title').textContent = 'Happily married';
-      $('#clock').hidden = true;
-      $('#cd-note').textContent = 'Anjana and Sravan were married on Sunday, 06 December 2026. Thank you for your blessings.';
-      return;
+    const r = CD.countdown(Date.now());
+    if (r.phase !== shownPhase) {
+      shownPhase = r.phase;
+      $('#countdown').dataset.phase = r.phase;
+      if (r.phase === 'today') {
+        $('#count-title').textContent = 'Today is the day';
+        $('#cd-note').textContent = 'Anjana and Sravan are married today before Guruvayurappan. Thank you for your blessings.';
+      } else if (r.phase === 'after') {
+        $('#count-title').textContent = 'Happily married';
+        $('#cd-note').textContent = 'Anjana and Sravan were married on Sunday, 06 December 2026. Thank you for your blessings.';
+      }
+      if (r.phase !== 'countdown') { $('#clock').hidden = true; $('#cd-local').hidden = true; }
     }
-    const d = Math.floor(ms / 864e5); ms -= d * 864e5;
-    const h = Math.floor(ms / 36e5); ms -= h * 36e5;
-    const m = Math.floor(ms / 6e4); ms -= m * 6e4;
-    const s = Math.floor(ms / 1e3);
-    $('#cd-d').textContent = d; $('#cd-h').textContent = pad(h);
-    $('#cd-m').textContent = pad(m); $('#cd-s').textContent = pad(s);
-    $('#clock').setAttribute('aria-label', `${d} days, ${h} hours and ${m} minutes to go`);
+    if (r.phase !== 'countdown') return;
+    $('#cd-d').textContent = r.d; $('#cd-h').textContent = pad(r.h);
+    $('#cd-m').textContent = pad(r.m); $('#cd-s').textContent = pad(r.s);
+    $('#clock').setAttribute('aria-label', `${r.d} days, ${r.h} hours and ${r.m} minutes to go`);
     setTimeout(tick, 1000 - (Date.now() % 1000));
   }
   tick();
@@ -95,14 +101,32 @@
   if (!reduce && 'IntersectionObserver' in window) new IntersectionObserver(([e]) => e.isIntersecting ? heroSky.start() : heroSky.stop()).observe($('#motes'));
   document.addEventListener('visibilitychange', () => document.hidden ? pageSky.stop() : pageSky.start());
 
+  /* Venues: copy address, with a fallback for browsers without the async clipboard */
+  const copyStatus = $('#copyStatus');
+  document.querySelectorAll('.copy[data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const text = b.dataset.copy;
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; }
+    catch {
+      const t = Object.assign(document.createElement('textarea'), { value: text });
+      t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;opacity:0';
+      document.body.append(t); t.select();
+      try { ok = document.execCommand('copy'); } catch {}
+      t.remove();
+    }
+    copyStatus.textContent = ok ? `Copied: ${text}` : `Address: ${text}`;
+    if (ok) { b.dataset.done = ''; setTimeout(() => delete b.dataset.done, 2400); }
+  }));
+
   /* Gallery lightbox */
   const items = [...document.querySelectorAll('.g[data-i]')];
-  const lb = $('#lb'), lbImg = $('#lbImg'), lbCap = $('#lbCap');
+  const lb = $('#lb'), lbImg = $('#lbImg'), lbCap = $('#lbCap'), lbCount = $('#lbCount');
   let cur = 0, lastFocus;
   function show(i) {
     cur = (i + items.length) % items.length;
     const im = items[cur].querySelector('img');
     lbImg.src = items[cur].dataset.full || im.currentSrc || im.src; lbImg.alt = im.alt; lbCap.textContent = im.alt;
+    lbCount.textContent = `${cur + 1} / ${items.length}`;
     lbImg.style.animation = 'none'; lbImg.offsetHeight; lbImg.style.animation = '';
   }
   items.forEach((b, i) => b.addEventListener('click', () => { lastFocus = b; show(i); lb.showModal(); $('#lbClose').focus(); }));
@@ -112,6 +136,15 @@
   lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
   lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); });
   lb.addEventListener('close', () => lastFocus && lastFocus.focus());
+  // swipe between photos on touch screens; a mostly-vertical drag is left to the browser
+  let sx = null, sy = 0;
+  lb.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') { sx = e.clientX; sy = e.clientY; } });
+  lb.addEventListener('pointerup', e => {
+    if (sx === null) return;
+    const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) show(cur + (dx < 0 ? 1 : -1));
+  });
+  lb.addEventListener('pointercancel', () => { sx = null; });
 
   /* Music: a soft generative piece in raga Mohanam over a tanpura-like drone, with hall reverb (Web Audio, nothing downloaded) */
   const btn = $('#music');
@@ -164,9 +197,11 @@
     syncBtn();
   }
   /* Background track: plays bgm.mp3 kept beside this page; falls back to the generative piece if it is missing */
-  const bgm = new Audio('bgm.mp3');
-  bgm.loop = true; bgm.preload = 'auto';
-  let mode = null, fileOK = true, fadeT;
+  let bgm, mode = null, fileOK = true, fadeT;
+  function track() {
+    if (!bgm) { bgm = new Audio('bgm.mp3'); bgm.loop = true; bgm.preload = 'auto'; }
+    return bgm;
+  }
   function fade(to, ms, done) {
     clearInterval(fadeT);
     const from = bgm.volume, f0 = performance.now();
@@ -181,7 +216,7 @@
     try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume(); } catch {}
     if (!fileOK) { mode = 'gen'; return startGen(); }
     mode = 'file'; playing = true; syncBtn();
-    bgm.volume = 0;
+    track().volume = 0;
     const fallback = () => { fileOK = false; if (mode !== 'file' || !playing) return; playing = false; mode = 'gen'; startGen(); };
     const p = bgm.play();
     if (p && p.then) p.then(() => playing && mode === 'file' ? fade(.85, 2500) : bgm.pause()).catch(fallback);
@@ -192,11 +227,15 @@
     if (mode === 'file') { playing = false; syncBtn(); fade(0, 1400, () => bgm.pause()); }
     else stopGen();
   }
+  const filmSound = $('#filmSound');
   function syncBtn() {
     btn.setAttribute('aria-pressed', playing);
     btn.setAttribute('aria-label', playing ? 'Pause background music' : 'Play soft background music');
+    filmSound.setAttribute('aria-pressed', playing);
+    filmSound.textContent = playing ? 'Sound on' : 'Sound off';
   }
   btn.addEventListener('click', () => playing ? stopMusic() : startMusic());
+  filmSound.addEventListener('click', () => playing ? stopMusic() : startMusic());
 
   /* Opening film */
   const film = $('#film'), scenes = [...film.querySelectorAll('.scene')], prog = $('#prog');
@@ -235,6 +274,8 @@
   }
   $('#openFilm').addEventListener('click', () => { startMusic(); play(); });
   $('#enterSilent').addEventListener('click', () => { film.classList.add('playing'); finish(); });
+  // keyboard users can close the title card with Escape too
+  film.addEventListener('keydown', e => { if (e.key === 'Escape' && !film.classList.contains('playing')) { film.classList.add('playing'); finish(); } });
   $('#skipFilm').addEventListener('click', finish);
   $('#replay').addEventListener('click', play);
   film.addEventListener('keydown', e => { if (e.key === 'Escape' && film.classList.contains('playing')) finish(); });

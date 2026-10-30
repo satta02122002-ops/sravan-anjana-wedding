@@ -3,15 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Anjana &amp; Sravan</title>
-<meta name="description" content="Anjana R and Sravan E.M. invite you to their wedding on Sunday, 06 December 2026. Muhurtham at Sreekrishna Temple, Guruvayoor, followed by lunch at Dream Palace Auditorium, Parappur, Thrissur.">
+<title>Anjana &amp; Sravan · Wedding Invitation · 06 December 2026</title>
+<meta name="description" content="Anjana R and Sravan E.M. invite you to their wedding on Sunday, 06 December 2026. Muhurtham at 8:00 AM at Sreekrishna Temple, Guruvayoor, followed by the wedding ceremony and lunch from 10:30 AM at Dream Palace Auditorium, Parappur, Thrissur.">
+<link rel="canonical" href="https://anjana-sravan.satteches.com/">
+<meta name="theme-color" content="#F4EFE4">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<!-- social sharing (WhatsApp, Facebook, X) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anjana-sravan.satteches.com/">
+<meta property="og:site_name" content="Anjana &amp; Sravan">
+<meta property="og:title" content="Anjana &amp; Sravan · Wedding Invitation">
+<meta property="og:description" content="Sunday, 06 December 2026 · Muhurtham 8:00 AM, Sreekrishna Temple, Guruvayoor · Wedding ceremony &amp; lunch from 10:30 AM, Dream Palace Auditorium, Parappur, Thrissur.">
+<meta property="og:image" content="https://anjana-sravan.satteches.com/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Anjana and Sravan standing together in a sunlit garden">
+<meta name="twitter:card" content="summary_large_image">
+<!-- the hero photo is the largest element on first paint -->
+<link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/couple-photo-640.avif 640w, assets/img/couple-photo-1086.avif 1086w" imagesizes="(max-width: 860px) 82vw, 420px" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Marcellus+SC&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@400;500;600&family=Pinyon+Script&display=swap">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Event","name":"Wedding of Anjana R & Sravan E.M.","startDate":"2026-12-06T08:00:00+05:30","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":[{"@type":"Place","name":"Sreekrishna Temple, Guruvayoor","address":"Guruvayoor, Thrissur, Kerala, India"},{"@type":"Place","name":"Dream Palace Auditorium","address":"Parappur, Thrissur, Kerala, India"}],"organizer":{"@type":"Person","name":"Mr. & Mrs. Raveendran"}}
+{"@context":"https://schema.org","@type":"Event","name":"Wedding of Anjana R & Sravan E.M.","startDate":"2026-12-06T08:00:00+05:30","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","image":"https://anjana-sravan.satteches.com/assets/img/og-image.jpg","description":"Muhurtham at 8:00 AM, Thalikettu Ceremony at Sreekrishna Temple, Guruvayoor; wedding ceremony and lunch from 10:30 AM at Dream Palace Auditorium, Parappur, Thrissur.","location":[{"@type":"Place","name":"Sreekrishna Temple, Guruvayoor","address":"Guruvayoor, Kerala, India"},{"@type":"Place","name":"Dream Palace Auditorium","address":"Parappur, Thrissur, Kerala, India"}],"organizer":{"@type":"Person","name":"Mrs. & Mr. Raveendran"}}
 </script>
 <link rel="stylesheet" href="css/site.css">
+<noscript><style>.film{display:none}.union{height:auto}.union-stage{position:relative}.u-tag,.u-copy .u-final{opacity:1}</style></noscript>
 </head>
 <body>
 <div class="film" id="film" role="dialog" aria-modal="true" aria-label="Opening film">
@@ -33,14 +52,15 @@
   <div class="grain" aria-hidden="true"></div>
   <canvas id="filmHearts" aria-hidden="true"></canvas>
   <div class="bar t" aria-hidden="true"></div><div class="bar b" aria-hidden="true"></div>
-  <div class="film-ui"><div class="progress" aria-hidden="true"><i id="prog"></i></div><button type="button" id="skipFilm">Skip ›</button></div>
+  <div class="film-ui"><button type="button" id="filmSound" aria-pressed="false">Sound off</button><div class="progress" aria-hidden="true"><i id="prog"></i></div><button type="button" id="skipFilm">Skip film ›</button></div>
   <div class="gate">
     <div class="gate-in">
       <p class="k">A wedding invitation</p>
-      <h2>Anjana<span>&amp;</span>Sravan</h2>
+      <p class="gate-title">Anjana<span>&amp;</span>Sravan</p>
       <p class="date">06 · 12 · 2026</p>
-      <button class="seal" type="button" id="openFilm" aria-label="Open the invitation and play the opening film with music"><span><b>A&amp;S</b>Tap to open</span></button>
-      <button class="skipline" type="button" id="enterSilent">Enter without the film</button>
+      <button class="seal" type="button" id="openFilm" aria-label="Open the invitation: play the 30-second opening film with music"><span><b>A&amp;S</b>Tap to open</span></button>
+      <p class="gate-hint">A 30-second film with music · skip any time</p>
+      <button class="enter" type="button" id="enterSilent">Enter invitation</button>
     </div>
   </div>
 </div>
@@ -97,11 +117,12 @@
   <section class="sec welcome" aria-labelledby="welcome-title">
     <div class="wrap">
       <div class="emblem"><picture><source type="image/avif" srcset="assets/img/ganesha.avif"><source type="image/webp" srcset="assets/img/ganesha.webp"><img src="assets/img/ganesha.jpg" alt="Golden Lord Ganesha seated on a lotus, as on the printed invitation." width="220" height="225" loading="lazy" decoding="async"></picture></div>
-      <p class="label">With the blessings of the Almighty</p>
-      <h2 id="welcome-title">You are warmly invited</h2>
+      <p class="label">With the Blessings of the Almighty</p>
+      <h2 id="welcome-title">You are cordially invited</h2>
       <div class="ornament" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.5 3.5 4 5.5 7.5 6-3.5.5-6 2.5-7.5 6-1.5-3.5-4-5.5-7.5-6C8 7.5 10.5 5.5 12 2Zm0 14c.8 1.8 2 3 3.8 3.5-1.8.5-3 1.7-3.8 3.5-.8-1.8-2-3-3.8-3.5 1.8-.5 3-1.7 3.8-3.5Z"/></svg></div>
-      <p class="big">Two families from Thrissur come together in celebration. It would mean the world to us to have you beside us as Anjana and Sravan tie the thali before Guruvayurappan, and to share a meal with you afterwards.</p>
-      <p class="hosts">Mrs. &amp; Mr. Raveendran<small>Puthiyaveetil House, Near Vazhiyil Sekhavankavu Temple, Tholur, Parappur, Thrissur · +91 98473 31705</small></p>
+      <p class="hosts">Mrs. &amp; Mr. Raveendran<small>Puthiyaveetil House, Near Vazhiyil Sekhavankavu Temple, Tholur, Parappur, Thrissur</small></p>
+      <p class="big">cordially invite you to grace the auspicious wedding ceremony of their beloved daughter <strong>Anjana R</strong> with <strong>Sravan E.M.</strong></p>
+      <a class="btn ghost call" href="tel:+919847331705"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call 98473 31705</a>
     </div>
   </section>
 
@@ -247,11 +268,12 @@
       <div class="u-love" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.2 1.8-2 3.3-3.2 5.4-3.2 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21Z"/></svg></div>
 
       <p class="u-hint" aria-hidden="true">Scroll to bring them together<i></i></p>
+      <a class="u-skip" href="#countdown">Skip animation <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
   <!-- COUNTDOWN -->
-  <section class="band" aria-labelledby="count-title">
+  <section class="band" id="countdown" aria-labelledby="count-title">
     <div class="wrap">
       <p class="label">Counting down to the Muhurtham</p>
       <h2 id="count-title">Until we say forever</h2>
@@ -261,7 +283,8 @@
         <div class="unit"><b id="cd-m">--</b><span>Minutes</span></div>
         <div class="unit"><b id="cd-s">--</b><span>Seconds</span></div>
       </div>
-      <p class="note" id="cd-note">Sunday, 06 December 2026 at 8:00 AM India time. That is 6:30 AM in Dubai for family joining from the Gulf.</p>
+      <p class="note" id="cd-note">Muhurtham on Sunday, 06 December 2026 at 8:00 AM India Standard Time.</p>
+      <p class="note local" id="cd-local" hidden></p>
     </div>
   </section>
 
@@ -307,11 +330,6 @@
         </div>
       </div>
 
-      <div class="dress">
-        <p class="label">Dress code</p>
-        <span>Traditional, festive attire</span>
-        <span class="tbc">To be confirmed by the family</span>
-      </div>
     </div>
   </section>
 
@@ -320,7 +338,7 @@
     <div class="wrap">
       <header class="sec-head rise">
         <p class="script">our story</p>
-        <h2 id="story-title">Under the Green Canopy</h2>
+        <h2 id="story-title">Two Families, One Bond</h2>
       </header>
       <div class="story-grid">
         <figure class="story-img rise">
@@ -328,9 +346,10 @@
           <figcaption>The moment captured on our invitation card.</figcaption>
         </figure>
         <ol class="chapters rise">
-          <li class="chapter"><span class="k" aria-hidden="true">i</span><h3>The First Hello <span class="tbc">Story to come</span></h3><p>Where it all began. Anjana and Sravan will share this chapter in their own words.</p></li>
-          <li class="chapter"><span class="k" aria-hidden="true">ii</span><h3>The Families Meet <span class="tbc">Story to come</span></h3><p>Two homes, Tholur and Kodakara, and the blessing that brought them together.</p></li>
-          <li class="chapter"><span class="k" aria-hidden="true">iii</span><h3>Together</h3><p>Before Guruvayurappan, on the morning of 06 December 2026, the next chapter begins.</p></li>
+          <!-- EDITABLE: chapter i is a deliberate invitation, not a story. Replace the paragraph with the couple's own words when available. -->
+          <li class="chapter"><span class="k" aria-hidden="true">i</span><h3>The First Hello</h3><p>Every love story begins with a hello. Theirs is one Anjana and Sravan will happily tell you themselves, so do ask them on the day.</p></li>
+          <li class="chapter"><span class="k" aria-hidden="true">ii</span><h3>Two Families, One Bond</h3><p>The Raveendran family of Puthiyaveetil House, Tholur, and the Edayapurath family of Kodakara, Thrissur, come together with the blessings of the Almighty.</p></li>
+          <li class="chapter"><span class="k" aria-hidden="true">iii</span><h3>A New Beginning</h3><p>At the 8:00 AM Muhurtham on Sunday, 06 December 2026, the Thalikettu Ceremony at the Sreekrishna Temple, Guruvayoor, begins their life together.</p></li>
         </ol>
       </div>
     </div>
@@ -349,9 +368,9 @@
           <div class="ev-time"><span class="lamp" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path class="flame" d="M16 4c2 3 3 5 0 8-3-3-2-5 0-8Z" fill="currentColor"/><path d="M8 15h16l-3 4H11l-3-4Z"/><path d="M16 19v6M11 28h10M13 25h6"/></svg></span><b>8:00 AM</b></div>
           <article class="ev-card">
             <p class="where">Sreekrishna Temple · Guruvayoor</p>
-            <h3>Muhurtham &amp; Thalikettu</h3>
-            <p>The sacred tying of the thali, held at the temple of Guruvayurappan. Please arrive a little early; the temple observes its own dress customs.</p>
-            <div class="row"><span class="chip">Sacred ceremony</span><a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sree+Krishna+Temple+Guruvayur+Kerala" target="_blank" rel="noopener">Directions</a></div>
+            <h3>Thalikettu Ceremony</h3>
+            <p>Muhurtham at 08:00 AM. The sacred tying of the thali, before Guruvayurappan.</p>
+            <div class="row"><span class="chip">Muhurtham</span><a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sree+Krishna+Temple+Guruvayur+Kerala" target="_blank" rel="noopener">Directions<span class="vh"> to Sreekrishna Temple (opens Google Maps)</span></a></div>
           </article>
         </li>
         <li class="ev rise">
@@ -359,8 +378,8 @@
           <article class="ev-card">
             <p class="where">Dream Palace Auditorium · Parappur, Thrissur</p>
             <h3>Wedding Ceremony &amp; Lunch</h3>
-            <p>Join us for the wedding ceremony, followed by lunch with family and friends.</p>
-            <div class="row"><span class="chip">Celebration</span><span class="chip">Lunch</span><a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Dream+Palace+Auditorium+Parappur+Thrissur" target="_blank" rel="noopener">Directions</a></div>
+            <p>We invite you to join us for the wedding ceremony and thereafter lunch, commencing at 10:30 AM.</p>
+            <div class="row"><span class="chip">Ceremony</span><span class="chip">Lunch</span><a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Dream+Palace+Auditorium+Parappur+Thrissur" target="_blank" rel="noopener">Directions<span class="vh"> to Dream Palace Auditorium (opens Google Maps)</span></a></div>
           </article>
         </li>
       </ol>
@@ -398,12 +417,13 @@
             <span class="pin"><svg viewBox="0 0 24 32" fill="currentColor"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 32 12 32s12-11.5 12-20.3C24 5.2 18.6 0 12 0Zm0 16a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6Z"/></svg></span>
           </div>
           <div class="venue-body">
-            <p class="label">8:00 AM · Muhurtham</p>
+            <p class="label">8:00 AM · Thalikettu Ceremony</p>
             <h3>Sreekrishna Temple</h3>
-            <address>Guruvayoor, Thrissur District, Kerala</address>
+            <address>Sreekrishna Temple, Guruvayoor, Kerala</address>
             <div class="row">
-              <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sree+Krishna+Temple+Guruvayur+Kerala" target="_blank" rel="noopener">Get directions</a>
-              <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Sree+Krishna+Temple+Guruvayur+Kerala" target="_blank" rel="noopener">Open map</a>
+              <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sree+Krishna+Temple+Guruvayur+Kerala" target="_blank" rel="noopener">Get directions<span class="vh"> to Sreekrishna Temple (opens Google Maps)</span></a>
+              <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Sree+Krishna+Temple+Guruvayur+Kerala" target="_blank" rel="noopener">Open map<span class="vh"> of Sreekrishna Temple</span></a>
+              <button class="copy" type="button" data-copy="Sreekrishna Temple, Guruvayoor, Kerala" aria-label="Copy address: Sreekrishna Temple, Guruvayoor, Kerala"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>Copy address</span></button>
             </div>
           </div>
         </article>
@@ -413,21 +433,18 @@
             <span class="pin"><svg viewBox="0 0 24 32" fill="currentColor"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 32 12 32s12-11.5 12-20.3C24 5.2 18.6 0 12 0Zm0 16a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6Z"/></svg></span>
           </div>
           <div class="venue-body">
-            <p class="label">From 10:30 AM · Ceremony &amp; Lunch</p>
+            <p class="label">10:30 AM · Wedding Ceremony &amp; Lunch</p>
             <h3>Dream Palace Auditorium</h3>
-            <address>Parappur, Thrissur, Kerala</address>
+            <address>Dream Palace Auditorium, Parappur, Thrissur, Kerala</address>
             <div class="row">
-              <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Dream+Palace+Auditorium+Parappur+Thrissur" target="_blank" rel="noopener">Get directions</a>
-              <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Dream+Palace+Auditorium+Parappur+Thrissur" target="_blank" rel="noopener">Open map</a>
+              <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Dream+Palace+Auditorium+Parappur+Thrissur" target="_blank" rel="noopener">Get directions<span class="vh"> to Dream Palace Auditorium (opens Google Maps)</span></a>
+              <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Dream+Palace+Auditorium+Parappur+Thrissur" target="_blank" rel="noopener">Open map<span class="vh"> of Dream Palace Auditorium</span></a>
+              <button class="copy" type="button" data-copy="Dream Palace Auditorium, Parappur, Thrissur, Kerala" aria-label="Copy address: Dream Palace Auditorium, Parappur, Thrissur, Kerala"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>Copy address</span></button>
             </div>
           </div>
         </article>
       </div>
-      <div class="travel">
-        <div><p class="label">By air</p><p>Cochin International Airport (COK) is the nearest airport for guests flying in.</p></div>
-        <div><p class="label">By rail</p><p>Thrissur railway station is the closest major stop for both venues.</p></div>
-        <div><p class="label">Between venues</p><p>Plan time to travel from Guruvayoor to Parappur before 10:30 AM.</p></div>
-      </div>
+      <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
     </div>
   </section>
 
@@ -450,7 +467,7 @@
 <footer><div class="wrap">06 · 12 · 2026 &nbsp;·&nbsp; Guruvayoor &amp; Thrissur, Kerala</div></footer>
 
 <dialog class="lb" id="lb" aria-label="Photo viewer">
-  <figure><img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <figure><img id="lbImg" alt=""><figcaption><span id="lbCap"></span> <span class="lb-count" id="lbCount"></span></figcaption></figure>
   <div class="lb-nav">
     <button class="iconbtn" type="button" id="lbPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7"/></svg></button>
     <button class="iconbtn" type="button" id="lbClose" aria-label="Close photo viewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -458,6 +475,7 @@
   </div>
 </dialog>
 
+<script src="js/countdown.js" defer></script>
 <script src="js/main.js" defer></script>
 <script src="js/union.js" defer></script>
 </body>
